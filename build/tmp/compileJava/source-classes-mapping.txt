@@ -1,0 +1,16 @@
+Student.java
+ Student
+Semester.java
+ Semester
+Teacher.java
+ Teacher
+StudentGroup.java
+ StudentGroup
+StudyProgram.java
+ StudyProgram
+Subject.java
+ Subject
+Mark.java
+ Mark
+Main.java
+ Main

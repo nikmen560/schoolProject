@@ -1,7 +1,7 @@
 public class Semester {
 
     private int semesterNumber;
-    private int semestersRemain;
+    private int yearsToStudy;
 
     public Semester(int semesterNumber) {
         this.semesterNumber = semesterNumber;
@@ -10,6 +10,8 @@ public class Semester {
     public int getSemesterNumber() {
         return semesterNumber;
     }
+
+
 
 
 }

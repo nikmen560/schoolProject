@@ -8,4 +8,5 @@ public class Subject {
         this.semester = semester;
         this.teacher = teacher;
     }
+
 }
