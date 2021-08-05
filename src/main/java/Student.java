@@ -45,25 +45,43 @@ public class Student {
         this.groupNumber = groupNumber;
     }
 
-    public void getStudents(ResultSet resultSet) throws SQLException {
+    public void showStudents() {
+        String query = "SELECT * FROM student";
+        try (Connection conn = DBConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(query)
+        ) {
+           displayStudent(rs);
 
-        while (resultSet.next()) {
-
-            String buffer = resultSet.getInt("id") +
-                   resultSet.getString("name") +
-                     resultSet.getString("surname") +
-                    resultSet.getInt("studentNumber") +
-                     resultSet.getInt("groupNumber");
-            System.out.println(buffer);
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void getStudentById(ResultSet rs, int index) throws SQLException {
+    public void displayStudent(ResultSet rs) throws SQLException {
+
         while (rs.next()) {
 
-            String buffer = rs.getInt("studentNumber") + " " + rs.getString("name");
-            System.out.println(buffer);
+            System.out.println(rs.getInt("id") + "\t" +
+                    rs.getString("name") + "\t" +
+                    rs.getString("surname") + "\t" +
+                    rs.getInt("studentNumber") + "\t" +
+                    rs.getInt("groupNumber")
+            );
+        }
+    }
+
+    public void getStudentById(int studentID)  {
+        String query = "SELECT * FROM student WHERE id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);) {
+
+            ps.setInt(1, studentID);
+            ResultSet rs = ps.executeQuery();
+            displayStudent(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
