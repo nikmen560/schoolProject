@@ -114,4 +114,26 @@ public class Student {
         return id;
     }
 
+    public boolean updateStudent(int id, String name, String surname, int studentNumber, int groupNumber) {
+        String query = "UPDATE student SET name =?, surname=?, studentNumber=?, groupNumber=? WHERE id=?";
+
+        int affectedrows = 0;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, name);
+            ps.setString(2, surname);
+            ps.setInt(3, studentNumber);
+            ps.setInt(4, groupNumber);
+            ps.setInt(5, id);
+            affectedrows = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return affectedrows != 0;
+
+    }
+
+
 }
