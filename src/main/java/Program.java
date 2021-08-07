@@ -3,11 +3,12 @@ import java.util.Scanner;
 public class Program {
 
     public void start() {
-
+        mainMenu();
     }
 
     public void mainMenu() {
-        while (true) {
+        boolean canceled = false;
+        while (!canceled) {
             Scanner scanner = new Scanner(System.in);
             System.out.println(Strings.HELLO_DISPLAY);
             System.out.println(Strings.MAIN_MENU);
@@ -15,27 +16,36 @@ public class Program {
             int mainMenuChoice = scanner.nextInt();
             switch (mainMenuChoice) {
                 case 1:
+                    canceled = true;
                     studentMenu();
+                    break;
+                case 2:
+                    canceled = true;
+                    studentGroupsMenu();
+                    break;
+
+                case 0:
                     break;
             }
         }
     }
 
     private void studentMenu() {
-
+        boolean canceled = false;
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (!canceled) {
 
             System.out.println(Strings.STUDENT_MENU);
             int studentMenuChoice = scanner.nextInt();
             switch (studentMenuChoice) {
-                case 1:
+                case 1 -> {
                     new Student().showStudents();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println(Strings.STUDENT_MENU_ADD_STUDENT_NAME);
                     String name = scanner.nextLine();
+                    // TODO: something went wrong here
                     System.out.println(Strings.STUDENT_MENU_ADD_STUDENT_SURNAME);
                     String surname = scanner.nextLine();
                     System.out.println(Strings.STUDENT_MENU_ADD_STUDENT_STUDENT_NUMBER);
@@ -44,8 +54,8 @@ public class Program {
                     int groupNumber = scanner.nextInt();
                     Student student = new Student(name, surname, studentNumber, groupNumber);
                     student.addStudent();
-                    break;
-                case 3 :
+                }
+                case 3 -> {
                     new Student().showStudents();
                     int studentID = scanner.nextInt();
                     System.out.println(Strings.STUDENT_MENU_UPDATE_STUDENT_NAME);
@@ -57,15 +67,20 @@ public class Program {
                     System.out.println(Strings.STUDENT_MENU_UPDATE_STUDENT_GROUP_NUMBER);
                     int updateGroupNumber = scanner.nextInt();
                     new Student().updateStudent(studentID, updateName, updateSurname, updateStudentNumber, updateGroupNumber);
-                    break;
-                case 4 :
-                    // delete student;
-                    break;
-                default:
-                    System.out.println("Enter a right number");
+                }
+//                case 4 -> canceled = true;
+                case 0 -> {
+                    canceled = true;
+                    mainMenu();
+                }
 
+                // delete student;
+                default -> System.out.println("Enter a right number");
             }
         }
+    }
+    public void studentGroupsMenu() {
+
     }
 
 
