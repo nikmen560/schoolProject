@@ -8,4 +8,16 @@ public class Teacher {
         this.lastName = lastName;
         this.surname = surname;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
 }
