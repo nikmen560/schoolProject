@@ -13,6 +13,24 @@ public class Strings {
             3. Update student\s
             4. Remove Student\s""";
 
+    public static final String STUDENT_GROUP_MENU = """
+            1. Show all groups\s
+            2. Add group\s
+            3. Update group\s
+            4. Remove group\s""";
+
+    public static final String SUBJECTS_MENU = """
+            1. Show all subjects\s
+            2. Add subject\s
+            3. Update subject\s
+            4. Remove subject\s""";
+
+    public static final String TEACHERS = """
+            1. Show all teachers\s
+            2. Add teacher\s
+            3. Update teacher\s
+            4. Remove teacher\s""";
+
     public static final String STUDENT_MENU_ADD_STUDENT_NAME = "Enter name";
     public static final String STUDENT_MENU_ADD_STUDENT_SURNAME = "Enter surname";
     public static final String STUDENT_MENU_ADD_STUDENT_STUDENT_NUMBER = "Enter student number";
