@@ -1,35 +1,64 @@
 public class Strings {
     public static final String HELLO_DISPLAY = "Welcome to iStudent";
     public static final String MAIN_MENU = """
+            
             Choose option by typing a number:
+            
             1. Students\s
             2. Student groups\s
             3. Subjects\s
-            4. Teachers\s""";
+            4. Teachers\s
+            
+            0.exit\s
+            
+            """;
+
 
     public static final String STUDENT_MENU = """
+            
             1. Show all students\s
             2. Add student\s
             3. Update student\s
-            4. Remove Student\s""";
+            4. Remove Student\s
+            
+            0.exit\s
+             
+            """;
 
     public static final String STUDENT_GROUP_MENU = """
+            
             1. Show all groups\s
             2. Add group\s
             3. Update group\s
-            4. Remove group\s""";
+            4. Remove group\s
+            
+            0.exit\s
+             
+            """;
 
     public static final String SUBJECTS_MENU = """
+            
             1. Show all subjects\s
             2. Add subject\s
             3. Update subject\s
-            4. Remove subject\s""";
+            4. Remove subject\s
+            
+            0.exit\s
+             
+            """;
 
-    public static final String TEACHERS = """
+    public static final String TEACHERS_MENU = """
+            
             1. Show all teachers\s
             2. Add teacher\s
             3. Update teacher\s
-            4. Remove teacher\s""";
+            4. Remove teacher\s
+            
+            0.exit\s
+             
+            """;
+
+    public static final String TYPO_IN_MENU = "Enter the right number";
 
     public static final String STUDENT_MENU_ADD_STUDENT_NAME = "Enter name";
     public static final String STUDENT_MENU_ADD_STUDENT_SURNAME = "Enter surname";
@@ -46,12 +75,24 @@ public class Strings {
     public static final String STUDENT_MENU_REMOVE_STUDENT_FAIL = "The student has not been removed";
 
 
-    public static final String STUDENT_GROUPS_MENU_ADD_GROUP_NAME = "Enter name";
     public static final String STUDENT_GROUPS_MENU_ADD_GROUP_NUMBER = "Enter number";
     public static final String STUDENT_GROUPS_MENU_ADD_GROUP_SEMESTER = "Enter semester";
 
-    public static final String STUDENT_GROUPS_MENU_UPDATE_GROUP = "Enter name";
-    public static final String STUDENT_GROUPS_MENU_REMOVE_GROUP = "Enter name";
+    public static final String STUDENT_GROUPS_MENU_UPDATE_GROUP_NUMBER = "Enter new number";
+    public static final String STUDENT_GROUPS_MENU_UPDATE_GROUP_SEMESTER = "Enter new semester";
+
+    public static final String SUBJECT_MENU_ADD_SUBJECT_NAME = "Enter name";
+    public static final String SUBJECT_MENU_ADD_SUBJECT_SEMESTER = "Enter semester";
+    public static final String SUBJECT_MENU_ADD_SUBJECT_TEACHER = "Enter teacher surname";
 
 
+    public static final String SUBJECT_MENU_UPDATE_SUBJECT_NAME = "Enter a new name";
+    public static final String SUBJECT_MENU_UPDATE_SUBJECT_SEMESTER = "Enter a new semester";
+    public static final String SUBJECT_MENU_UPDATE_SUBJECT_TEACHER = "Enter a new teacher name";
+
+    public static final String TEACHER_MENU_ADD_TEACHER_NAME = "Enter name";
+    public static final String TEACHER_MENU_ADD_TEACHER_SURNAME = "Enter surname";
+
+    public static final String TEACHER_MENU_UPDATE_TEACHER_NAME = "Enter a new name";
+    public static final String TEACHER_MENU_UPDATE_TEACHER_SURNAME = "Enter a new surname";
 }
