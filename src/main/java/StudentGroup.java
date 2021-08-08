@@ -9,6 +9,13 @@ public class StudentGroup {
     private Semester semester;
     private int studyYears;
 
+    public StudentGroup(int groupNumber, Semester semester) {
+        this.groupNumber = groupNumber;
+        this.semester = semester;
+    }
+    public StudentGroup() {
+
+    }
 
     public void displayGroup(ResultSet rs) throws SQLException{
 
@@ -60,6 +67,55 @@ public class StudentGroup {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void addStudentGroup() {
+        String query = "INSERT INTO studentgroup (groupNumber,semester) VALUES(?,?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        ) {
+            ps.setInt(1, this.groupNumber);
+            ps.setInt(2, this.semester.getSemesterNumber());
+
+             ps.executeUpdate();
+
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean updateGroup(int groupID, int groupNumber, int semester) {
+        String query = "UPDATE studentgroup SET groupNumber =?, semester=? WHERE id=?";
+
+        int affectedrows = 0;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, groupNumber);
+            ps.setInt(2, semester);
+            ps.setInt(3, groupID);
+            affectedrows = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return affectedrows != 0;
+    }
+
+    public boolean deleteGroup(int id) {
+        String query = "DELETE FROM studentgroup WHERE id=?";
+
+        int affectedrows = 0;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            affectedrows = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return affectedrows != 0;
     }
 
 

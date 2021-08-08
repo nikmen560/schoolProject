@@ -88,7 +88,7 @@ public class Student {
         }
     }
 
-    public long addStudent() {
+    public boolean addStudent() {
         String query = "INSERT INTO student(name,surname,studentNumber,groupNumber) VALUES(?,?,?,?)";
         long id = 0;
         try (Connection conn = DBConnection.getConnection();
@@ -114,7 +114,8 @@ public class Student {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return id;
+        return id != 0;
+
     }
 
     public boolean updateStudent(int id, String name, String surname, int studentNumber, int groupNumber) {
@@ -136,6 +137,21 @@ public class Student {
         }
         return affectedrows != 0;
 
+    }
+    public boolean deleteStudent(int id) {
+        String query = "DELETE FROM student WHERE id=?";
+
+        int affectedrows = 0;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            affectedrows = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return affectedrows != 0;
     }
 
 
