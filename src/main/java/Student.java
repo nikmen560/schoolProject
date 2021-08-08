@@ -12,6 +12,9 @@ public class Student {
         this.studentNumber = studentNumber;
         this.groupNumber = groupNumber;
     }
+    public Student() {
+
+    }
 
     public String getName() {
         return name;
