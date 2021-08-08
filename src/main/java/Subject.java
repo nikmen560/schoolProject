@@ -30,7 +30,6 @@ public class Subject {
 
             System.out.println(rs.getInt("id") + "\t" +
                     rs.getString("name") + "\t" +
-                    rs.getString("surname") + "\t" +
                     rs.getInt("semester") + "\t" +
                     rs.getInt("teacher")
             );
@@ -38,7 +37,7 @@ public class Subject {
     }
 
     public void getSubjectById(int studentID)  {
-        String query = "SELECT * FROM student WHERE id=?";
+        String query = "SELECT * FROM subject WHERE id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query);) {
 
