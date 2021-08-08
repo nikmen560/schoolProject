@@ -68,7 +68,10 @@ public class Program {
                     int updateGroupNumber = scanner.nextInt();
                     new Student().updateStudent(studentID, updateName, updateSurname, updateStudentNumber, updateGroupNumber);
                 }
-//                case 4 -> canceled = true;
+                case 4 -> {
+                    canceled = true;
+
+                }
                 case 0 -> {
                     canceled = true;
                     mainMenu();
@@ -80,6 +83,44 @@ public class Program {
         }
     }
     public void studentGroupsMenu() {
+
+        boolean canceled = false;
+        while (!canceled) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(Strings.STUDENT_GROUP_MENU);
+
+            int studentGroupMenuChoice= scanner.nextInt();
+            switch (studentGroupMenuChoice) {
+                case 1:
+                    canceled = true;
+                    new StudentGroup().showGroups();
+                    break;
+                case 2:
+                    canceled = true;
+                    addGroup();
+                    break;
+
+                case 0:
+                    break;
+            }
+        }
+
+    }
+    public boolean addGroup() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(Strings.STUDENT_GROUPS_MENU_ADD_GROUP_NAME);
+
+        System.out.println(Strings.STUDENT_GROUPS_MENU_ADD_GROUP_NUMBER);
+        System.out.println(Strings.STUDENT_GROUPS_MENU_ADD_GROUP_SEMESTER);
+
+
+        return true;
+    }
+    public void subjectMenu() {
+
+    }
+    public void teacherMenu() {
 
     }
 
