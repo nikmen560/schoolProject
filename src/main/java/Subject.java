@@ -11,6 +11,9 @@ public class Subject {
         this.teacher = teacher;
     }
 
+    public Subject() {
+    }
+
     public void showSubjects() {
         String query = "SELECT * FROM subject";
         try (Connection conn = DBConnection.getConnection();
@@ -31,7 +34,7 @@ public class Subject {
             System.out.println(rs.getInt("id") + "\t" +
                     rs.getString("name") + "\t" +
                     rs.getInt("semester") + "\t" +
-                    rs.getInt("teacher")
+                    rs.getString("teacher")
             );
         }
     }
@@ -50,7 +53,7 @@ public class Subject {
         }
     }
 
-    public long addSubject() {
+    public boolean addSubject() {
         String query = "INSERT INTO subject(name,semester,teacher) VALUES(?,?,?)";
         long id = 0;
         try (Connection conn = DBConnection.getConnection();
@@ -75,11 +78,11 @@ public class Subject {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return id;
+        return id != 0;
     }
 
     public boolean updateSubject(int id, String name, int semesterNumber, String teacherSurname) {
-        String query = "UPDATE student SET name =?, semester=?, teacher=? WHERE id=?";
+        String query = "UPDATE subject SET name =?, semester=?, teacher=? WHERE id=?";
 
         int affectedrows = 0;
         try (Connection conn = DBConnection.getConnection();
@@ -97,5 +100,22 @@ public class Subject {
         return affectedrows != 0;
 
     }
+
+    public boolean deleteSubject(int id) {
+        String query = "DELETE FROM subject WHERE id=?";
+
+        int affectedrows = 0;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            affectedrows = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return affectedrows != 0;
+    }
+
 
 }
