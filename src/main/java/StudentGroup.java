@@ -9,15 +9,20 @@ public class StudentGroup {
     private Semester semester;
     private int studyYears;
 
+    public int getGroupNumber() {
+        return groupNumber;
+    }
+
     public StudentGroup(int groupNumber, Semester semester) {
         this.groupNumber = groupNumber;
         this.semester = semester;
     }
+
     public StudentGroup() {
 
     }
 
-    public void displayGroup(ResultSet rs) throws SQLException{
+    public void displayGroup(ResultSet rs) throws SQLException {
 
         while (rs.next()) {
 
@@ -27,6 +32,7 @@ public class StudentGroup {
             );
         }
     }
+
     public void showGroups() {
         String query = "SELECT * FROM studentgroup";
         try (Connection conn = DBConnection.getConnection();
@@ -39,14 +45,32 @@ public class StudentGroup {
             e.printStackTrace();
         }
     }
-    public void getGroupById(int groupID)  {
+    public void showStudentInGroup(int groupNum){
+        String query = "SELECT * FROM student WHERE groupNumber=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);) {
+
+            ps.setInt(1, groupNum);
+            ResultSet rs = ps.executeQuery();
+            new Student().displayStudent(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getGroupNumById(int groupID) {
         String query = "SELECT * FROM studentgroup WHERE id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query);) {
 
             ps.setInt(1, groupID);
             ResultSet rs = ps.executeQuery();
-            displayGroup(rs);
+            while (rs.next()) {
+                int groupNum = rs.getInt("groupNumber");
+                showStudentInGroup(groupNum);
+            }
+//             showStudentInGroup(groupNum);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,6 +92,7 @@ public class StudentGroup {
             e.printStackTrace();
         }
     }
+
     public void addStudentGroup() {
         String query = "INSERT INTO studentgroup (groupNumber,semester) VALUES(?,?)";
 
@@ -77,13 +102,13 @@ public class StudentGroup {
             ps.setInt(1, this.groupNumber);
             ps.setInt(2, this.semester.getSemesterNumber());
 
-             ps.executeUpdate();
+            ps.executeUpdate();
 
-            }
-         catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public boolean updateGroup(int groupID, int groupNumber, int semester) {
         String query = "UPDATE studentgroup SET groupNumber =?, semester=? WHERE id=?";
 
@@ -117,7 +142,6 @@ public class StudentGroup {
         }
         return affectedrows != 0;
     }
-
 
 
 }

@@ -31,9 +31,9 @@ public class Strings {
             2. Add group\s
             3. Update group\s
             4. Remove group\s
+            5. Show all students from a group \s 
             
             0.exit\s
-             
             """;
 
     public static final String SUBJECTS_MENU = """
@@ -42,9 +42,9 @@ public class Strings {
             2. Add subject\s
             3. Update subject\s
             4. Remove subject\s
+            5. Show all subjects in a group \s
             
             0.exit\s
-             
             """;
 
     public static final String TEACHERS_MENU = """
@@ -55,7 +55,6 @@ public class Strings {
             4. Remove teacher\s
             
             0.exit\s
-             
             """;
 
     public static final String TYPO_IN_MENU = "Enter the right number";
@@ -82,8 +81,11 @@ public class Strings {
     public static final String STUDENT_GROUPS_MENU_UPDATE_GROUP_SEMESTER = "Enter new semester";
 
     public static final String SUBJECT_MENU_ADD_SUBJECT_NAME = "Enter name";
-    public static final String SUBJECT_MENU_ADD_SUBJECT_SEMESTER = "Enter semester";
+    public static final String SUBJECT_MENU_ADD_SUBJECT_GROUPNUMBER = "Enter group number";
     public static final String SUBJECT_MENU_ADD_SUBJECT_TEACHER = "Enter teacher surname";
+
+
+    public static final String SUBJECT_MENU_CHOOSE_GROUP = "choose the group";
 
 
     public static final String SUBJECT_MENU_UPDATE_SUBJECT_NAME = "Enter a new name";
