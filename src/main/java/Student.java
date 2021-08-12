@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Student {
     private String name;
@@ -12,6 +13,7 @@ public class Student {
         this.studentNumber = studentNumber;
         this.groupNumber = groupNumber;
     }
+
     public Student() {
 
     }
@@ -54,7 +56,7 @@ public class Student {
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(query)
         ) {
-           displayStudent(rs);
+            displayStudent(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,7 +76,7 @@ public class Student {
         }
     }
 
-    public void getStudentById(int studentID)  {
+    public void getStudentById(int studentID) {
         String query = "SELECT * FROM student WHERE id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query);) {
@@ -138,6 +140,7 @@ public class Student {
         return affectedrows != 0;
 
     }
+
     public boolean deleteStudent(int id) {
         String query = "DELETE FROM student WHERE id=?";
 
@@ -154,5 +157,51 @@ public class Student {
         return affectedrows != 0;
     }
 
+    public void showStudentsInGroup(StudentGroup studentGroup) {
+        ArrayList<Student> students = getStudentsInGroup(studentGroup);
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
 
+    private ArrayList<Student> getStudentsInGroup(StudentGroup studentGroup) {
+
+        ArrayList<Student> students = new ArrayList<>();
+        Student student;
+        String studentName;
+        String studentSurname;
+        int studentNumber;
+        int groupNumber;
+
+        String query = "SELECT * FROM  student WHERE groupNumber=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);) {
+
+            ps.setInt(1, studentGroup.getGroupNumber());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                studentName = rs.getString("name");
+                studentSurname = rs.getString("surname");
+                studentNumber = rs.getInt("studentNumber");
+                groupNumber = rs.getInt("groupNumber");
+                student = new Student(studentName, studentSurname, studentNumber, groupNumber);
+                students.add(student);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", studentNumber=" + studentNumber +
+                ", groupNumber=" + groupNumber;
+    }
 }

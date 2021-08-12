@@ -242,12 +242,19 @@ public class Program {
         int id = scanner.nextInt();
         return new StudentGroup().deleteGroup(id);
     }
+
+    ////////////////////////////
     public void showStudentsInGroup() {
+        new StudentGroup().showGroups();
         Scanner scanner = new Scanner(System.in);
-        int id = scanner.nextInt();
-        new StudentGroup().getGroupNumById(id);
-//        new StudyProgram().showStudyProgram(groupNumber);
+        int groupID = scanner.nextInt();
+
+        StudentGroup foundedStudentGroup = new StudentGroup().getStudentGroup(groupID);
+
+        Student student = new Student();
+        student.showStudentsInGroup(foundedStudentGroup);
     }
+    ///////////////////////////////////
 
     public boolean addSubject() {
         Scanner scanner = new Scanner(System.in);
