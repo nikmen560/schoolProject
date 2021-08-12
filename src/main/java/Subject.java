@@ -2,12 +2,12 @@ import java.sql.*;
 
 public class Subject {
     private String name;
-    private Semester semester;
+    private int groupNumber;
     private Teacher teacher;
 
-    public Subject(String name, Semester semester, Teacher teacher) {
+    public Subject(String name, int groupNumber, Teacher teacher) {
         this.name = name;
-        this.semester = semester;
+        this.groupNumber = groupNumber;
         this.teacher = teacher;
     }
 
@@ -33,7 +33,7 @@ public class Subject {
 
             System.out.println(rs.getInt("id") + "\t" +
                     rs.getString("name") + "\t" +
-                    rs.getInt("semester") + "\t" +
+                    rs.getInt("groupNumber") + "\t" +
                     rs.getString("teacher")
             );
         }
@@ -54,13 +54,13 @@ public class Subject {
     }
 
     public boolean addSubject() {
-        String query = "INSERT INTO subject(name,semester,teacher) VALUES(?,?,?)";
+        String query = "INSERT INTO subject(name,groupNumber,teacher) VALUES(?,?,?)";
         long id = 0;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ) {
             ps.setString(1, this.name);
-            ps.setInt(2, this.semester.getSemesterNumber());
+            ps.setInt(2, this.groupNumber);
             ps.setString(3, this.teacher.getSurname());
 
             int affectedRows = ps.executeUpdate();
@@ -81,15 +81,15 @@ public class Subject {
         return id != 0;
     }
 
-    public boolean updateSubject(int id, String name, int semesterNumber, String teacherSurname) {
-        String query = "UPDATE subject SET name =?, semester=?, teacher=? WHERE id=?";
+    public boolean updateSubject(int id, String name, int groupNumber, String teacherSurname) {
+        String query = "UPDATE subject SET name =?, groupNumber=?, teacher=? WHERE id=?";
 
         int affectedrows = 0;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, name);
-            ps.setInt(2, semesterNumber);
+            ps.setInt(2, this.groupNumber);
             ps.setString(3, teacherSurname);
             ps.setInt(4, id);
             affectedrows = ps.executeUpdate();
@@ -117,5 +117,12 @@ public class Subject {
         return affectedrows != 0;
     }
 
-
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                ", groupNumber=" + groupNumber +
+                ", teacher=" + teacher +
+                '}';
+    }
 }

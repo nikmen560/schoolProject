@@ -70,11 +70,39 @@ public class StudentGroup {
                 int groupNum = rs.getInt("groupNumber");
                 showStudentInGroup(groupNum);
             }
+
 //             showStudentInGroup(groupNum);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public StudentGroup getStudentGroup(int id) {
+
+        StudentGroup currStudentGroup = null;
+        int currGroupNum = 0;
+        Semester currSemester = null;
+
+        String query = "SELECT * FROM studentgroup WHERE id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                currGroupNum = rs.getInt("groupNumber");
+                currSemester = new Semester(rs.getInt("semester"));
+                currStudentGroup = new StudentGroup(currGroupNum, currSemester);
+            }
+
+//             showStudentInGroup(groupNum);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return currStudentGroup;
     }
 
     public void showStudentsFromGroup(int groupNumber) {

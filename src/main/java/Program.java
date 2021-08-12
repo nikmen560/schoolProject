@@ -36,6 +36,7 @@ public class Program {
                 default:
                     System.out.println(Strings.TYPO_IN_MENU);
             }
+            break;
         }
     }
 
@@ -61,6 +62,7 @@ public class Program {
                     removeStudent();
                 }
                 case 0 -> {
+                    canceled = true;
                     mainMenu();
                 }
 
@@ -90,7 +92,13 @@ public class Program {
                 case 4 -> {
                     deleteSubject();
                 }
-                case 0 -> mainMenu();
+                case 5 -> {
+                    showSubjectsInGroup();
+                }
+                case 0 -> {
+                    canceled = true;
+                    mainMenu();
+                }
                 default -> System.out.println(Strings.TYPO_IN_MENU);
             }
         }
@@ -135,7 +143,7 @@ public class Program {
             int studentGroupMenuChoice= scanner.nextInt();
             switch (studentGroupMenuChoice) {
                 case 1:
-                    new StudentGroup().showGroups();
+                    showGroups();
                     break;
                 case 2:
                     addGroup();
@@ -147,6 +155,10 @@ public class Program {
                 case 4:
                     removeGroup();
                     break;
+                case 5:
+                    showGroups();
+                    showStudentsInGroup();
+                    break;
                 case 0:
                     mainMenu();
                     break;
@@ -156,6 +168,7 @@ public class Program {
         }
 
     }
+
     public boolean addStudent() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(Strings.STUDENT_MENU_ADD_STUDENT_NAME);
@@ -193,6 +206,11 @@ public class Program {
         return new Student().deleteStudent(id);
 
     }
+
+    public void showGroups() {
+        new StudentGroup().showGroups();
+    }
+
     public boolean addGroup() {
         Scanner scanner = new Scanner(System.in);
 
@@ -224,19 +242,24 @@ public class Program {
         int id = scanner.nextInt();
         return new StudentGroup().deleteGroup(id);
     }
+    public void showStudentsInGroup() {
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        new StudentGroup().getGroupNumById(id);
+//        new StudyProgram().showStudyProgram(groupNumber);
+    }
 
     public boolean addSubject() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(Strings.SUBJECT_MENU_ADD_SUBJECT_NAME);
         String subjectName = scanner.nextLine();
-        System.out.println(Strings.SUBJECT_MENU_ADD_SUBJECT_SEMESTER);
-        int semesterNumber = scanner.nextInt();
+        System.out.println(Strings.SUBJECT_MENU_ADD_SUBJECT_GROUPNUMBER);
+        int groupNumber = scanner.nextInt();
         System.out.println(Strings.SUBJECT_MENU_ADD_SUBJECT_TEACHER);
         String teacherName = scanner.next();
-        Semester semester = new Semester(semesterNumber);
         Teacher teacher = new Teacher("",  teacherName);
-        Subject subject = new Subject(subjectName, semester, teacher);
+        Subject subject = new Subject(subjectName, groupNumber, teacher);
         return subject.addSubject();
     }
     public boolean updateSubject() {
@@ -257,6 +280,17 @@ public class Program {
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
         return new Subject().deleteSubject(id);
+    }
+
+    public void showSubjectsInGroup() {
+        new StudentGroup().showGroups();
+        Scanner scanner = new Scanner(System.in);
+        int groupID = scanner.nextInt();
+
+        StudentGroup foundedStudentGroup = new StudentGroup().getStudentGroup(groupID);
+
+        StudyProgram studyProgram = new StudyProgram();
+        studyProgram.showStudyProgram(foundedStudentGroup);
     }
 
     public boolean addTeacher() {

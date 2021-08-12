@@ -6,19 +6,19 @@ Showable.java
  Showable
 Semester.java
  Semester
-Main.java
- Main
-Program.java
- Program
-StudentGroup.java
- StudentGroup
-Strings.java
- Strings
-StudyProgram.java
- StudyProgram
-Subject.java
- Subject
 Mark.java
  Mark
 Teacher.java
  Teacher
+Subject.java
+ Subject
+Strings.java
+ Strings
+StudyProgram.java
+ StudyProgram
+StudentGroup.java
+ StudentGroup
+Main.java
+ Main
+Program.java
+ Program
