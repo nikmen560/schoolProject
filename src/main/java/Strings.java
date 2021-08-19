@@ -8,6 +8,7 @@ public class Strings {
             2. Student groups\s
             3. Subjects\s
             4. Teachers\s
+            5. Marks \s
             
             0.exit\s
             
@@ -56,6 +57,13 @@ public class Strings {
             
             0.exit\s
             """;
+    public static final String MARKS_MENU = """
+            
+            1. Show all marks\s
+            2. Add mark\s
+            
+            0.exit\s
+            """;
 
     public static final String TYPO_IN_MENU = "Enter the right number";
 
@@ -97,4 +105,10 @@ public class Strings {
 
     public static final String TEACHER_MENU_UPDATE_TEACHER_NAME = "Enter a new name";
     public static final String TEACHER_MENU_UPDATE_TEACHER_SURNAME = "Enter a new surname";
+
+    public static final String MARK_MENU_ADD_VALUE= "Enter value";
+    public static final String MARK_MENU_ADD_STUDENT= "Choose student ";
+    public static final String MARK_MENU_ADD_GROUP_NUMBER = "enter group number";
+
+    public static final String IS_NOT_VALID_NUM = "is not a valid num";
 }

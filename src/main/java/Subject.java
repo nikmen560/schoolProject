@@ -13,6 +13,39 @@ public class Subject {
 
     public Subject() {
     }
+    public Subject get(int id) {
+        Subject subject = null;
+        String name;
+        int teacherID;
+        int groupid;
+        Teacher teacher = null;
+
+        String query = "SELECT * FROM  subject WHERE id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                name = rs.getString("name");
+                teacherID = rs.getInt("teacherid");
+                teacher = new Teacher().get(teacherID);
+                groupid = rs.getInt("groupid");
+
+                subject = new Subject(name, groupid, teacher);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return subject;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void showSubjects() {
         String query = "SELECT * FROM subject";
@@ -32,9 +65,7 @@ public class Subject {
         while (rs.next()) {
 
             System.out.println(rs.getInt("id") + "\t" +
-                    rs.getString("name") + "\t" +
-                    rs.getInt("groupNumber") + "\t" +
-                    rs.getString("teacher")
+                    rs.getString("name") + "\t"
             );
         }
     }
@@ -117,12 +148,11 @@ public class Subject {
         return affectedrows != 0;
     }
 
+
     @Override
     public String toString() {
         return "Subject{" +
                 "name='" + name + '\'' +
-                ", groupNumber=" + groupNumber +
-                ", teacher=" + teacher +
                 '}';
     }
 }

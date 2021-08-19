@@ -1,7 +1,7 @@
-public interface Showable {
+public interface Showable<T> {
     void show();
-    void showAll();
+    T get(int id);
     boolean add();
-    boolean update();
-    boolean remove();
+    boolean update(int id);
+    boolean remove(int id);
 }

@@ -2,23 +2,23 @@ Student.java
  Student
 DBConnection.java
  DBConnection
-Showable.java
- Showable
 Semester.java
  Semester
-Mark.java
- Mark
-Teacher.java
- Teacher
-Subject.java
- Subject
-Strings.java
- Strings
-StudyProgram.java
- StudyProgram
-StudentGroup.java
- StudentGroup
+Showable.java
+ Showable
 Main.java
  Main
 Program.java
  Program
+StudentGroup.java
+ StudentGroup
+Strings.java
+ Strings
+StudyProgram.java
+ StudyProgram
+Subject.java
+ Subject
+Mark.java
+ Mark
+Teacher.java
+ Teacher

@@ -27,7 +27,7 @@ public class StudentGroup {
         while (rs.next()) {
 
             System.out.println(rs.getInt("id") + "\t" +
-                    rs.getInt("groupNumber") + "\t" +
+                    rs.getInt("groupNumber") + "\t" + "semester: \t" +
                     rs.getInt("semester")
             );
         }

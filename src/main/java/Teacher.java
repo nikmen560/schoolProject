@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Teacher {
+public class Teacher implements Showable<Teacher>{
     private String name;
     private String surname;
 
@@ -120,5 +120,51 @@ public class Teacher {
             e.printStackTrace();
         }
         return affectedrows != 0;
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public Teacher get(int id) {
+        String name;
+        String surname;
+        Teacher teacher = null;
+
+        String query = "SELECT * FROM  teacher WHERE id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                name = rs.getString("name");
+                surname = rs.getString("surname");
+                teacher = new Teacher(name, surname);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+
+    @Override
+    public boolean add() {
+        return false;
+    }
+
+    @Override
+    public boolean update(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(int id) {
+        return false;
     }
 }
